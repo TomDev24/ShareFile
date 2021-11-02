@@ -1,7 +1,7 @@
-from flask import url_for, redirect, render_template, flash
+from flask import url_for, redirect, render_template, flash, send_from_directory
 from shareFile.forms import RegForm, LoginForm, UploadFileForm
 from shareFile import app, db, bcrypt
-from shareFile.models import User, FileEntry
+from shareFile.models import User, FileEntry, SharedFiles
 from flask_login import login_user, current_user, logout_user, login_required
 import os
 import secrets
@@ -9,7 +9,28 @@ import secrets
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    res = []
+    if current_user.id:
+        shared_files = User.query.get(current_user.id).shared_files
+        shared_files_id = [f.file for f in shared_files]
+        res = FileEntry.query.filter(FileEntry.id.in_(shared_files_id)).all()
+    files = FileEntry.query.filter_by(access=2).order_by(FileEntry.download_amount.desc()).all()
+    all_files = files + res
+    all_files = sorted(all_files, key=lambda d: d.download_amount, reverse=True)
+    return render_template("home.html", files=all_files)
+
+@app.route("/files/<file_name>")
+def get_file(file_name):
+    file = FileEntry.query.filter_by(file_path=file_name).first()
+    if file and (file.access == 1 or file.access == 2 or file.user_id == current_user.id):
+        if file.access == 1 and current_user.id:
+            new_shared = SharedFiles(file=file.id, user_id=current_user.id) # rename file
+            db.session.add(new_shared)
+            db.session.commit()
+        file.download_amount = file.download_amount + 1;
+        db.session.commit()
+        return send_from_directory("static", "FileCollection/" + file_name)
+    return redirect(url_for("home"))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
