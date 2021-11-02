@@ -17,3 +17,6 @@ pip install -r requirements.txt
 #run application
 python run.py
 ```
+
+### Credentials
+admin@admin.ru : admin
