@@ -4,14 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ShareFile</title>
+  <title>shareFile</title>
 </head>
 <body>
   <nav>
     <ul>
       <li><a href="{{ url_for("home") }}">Home</a></li>
-      <li><a href="{{ url_for("register") }}">Register</a></li>
-      <li><a href="{{ url_for("login") }}">Login</a></li>
+      {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for("account") }}">Account</a></li>
+        <li><a href="{{ url_for("logout") }}">Log Out</a></li>
+      {% else %}
+        <li><a href="{{ url_for("register") }}">Register</a></li>
+        <li><a href="{{ url_for("login") }}">Login</a></li>
+      {% endif %}
     </ul>
   </nav>
   {% with messages = get_flashed_messages() %}

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+  {% block content %}
+  <div>
+    <h2>{{ current_user.username }}</h2>
+    <div>
+      <h2>Uploaded files</h2>
+      {% if files %}
+      <ul>
+        {% for file in files %}
+          <li><a href="files/{{ file.file_path }}"> {{ file.filename }} </a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    <form method="POST" action="" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <fieldset>
+        <legend>Upload File</legend>
+        <div>
+          {% if form.filename.errors %}
+            <div>
+              {% for error in form.filename.errors %}
+                <small>{{ error }};</small>
+              {% endfor %}
+            </div>
+          {% endif%}
+          {{ form.filename.label }}
+          {{ form.filename }}
+        </div>
+        <div>
+          {% if form.file.errors %}
+            <div>
+              {% for error in form.file.errors %}
+                <small>{{ error }};</small>
+              {% endfor %}
+            </div>
+          {% endif%}
+          {{ form.file.label }}
+          {{ form.file }}
+        </div>
+        <div class="">
+          {{ form.access_setting.label }}
+          {{ form.access_setting }}
+        </div>
+      </fieldset>
+      <div>
+        {{ form.submit }}
+      </div>
+    </form>
+  </div>
+  {% endblock content%}

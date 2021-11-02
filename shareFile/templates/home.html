@@ -1,4 +1,18 @@
 {% extends "layout.html" %}
   {% block content %}
     <h1>Home page</h1>
+    {% if files%}
+      {% for file in files %}
+        <div style="border: 1px solid black;">
+          <h2> {{ file.filename }} </h2>
+          <p>Downloaded: {{ file.download_amount }}</p>
+          {% if file.access == 2 %}
+            <p>File in public domain</p>
+          {% else %}
+            <p>You have access to file</p>
+          {% endif %}
+          <div><a href="files/{{ file.file_path }}">Link</a></div>
+        </div>
+      {% endfor %}
+    {% endif%}
   {% endblock %}
