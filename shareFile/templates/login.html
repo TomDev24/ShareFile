@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+  {% block content %}
+    <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset>
+        <legend>Log in</legend>
+        <div>
+          {% if form.email.errors %}
+            <div>
+              {% for error in form.email.errors %}
+                <small>{{ error }};</small>
+              {% endfor %}
+            </div>
+          {% endif%}
+          {{ form.email.label }}
+          {{ form.email }}
+        </div>
+        <div>
+          {% if form.password.errors %}
+            <div>
+              {% for error in form.password.errors %}
+                <small>{{ error }};</small>
+              {% endfor %}
+            </div>
+          {% endif%}
+          {{ form.password.label }}
+          {{ form.password }}
+        </div>
+      </fieldset>
+      <div>
+        {{ form.submit }}
+      </div>
+    </form>
+  {% endblock content%}

@@ -1,5 +1,7 @@
 # Virtualenv
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+__pycache__
+shareFile/__pycache__
 .Python
 [Bb]in
 [Ii]nclude

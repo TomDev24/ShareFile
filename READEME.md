@@ -6,5 +6,8 @@ python -m venv .
 #activate virtual env
 source Scripts/activate
 
+#Upgrade pip
+python -m pip install --upgrade pip
+
 #install dependencies
 pip install -r requirements.txt
