@@ -1,5 +1,7 @@
-All commands should be executed inside repository directory
+# shareFile - file hosting website made with Flask
+### All commands should be executed inside repository directory
 
+```
 #Create virtual enviroment in current folder
 python -m venv .
 
@@ -11,3 +13,7 @@ python -m pip install --upgrade pip
 
 #install dependencies
 pip install -r requirements.txt
+
+#run application
+python run.py
+```
