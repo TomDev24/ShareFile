@@ -9,13 +9,13 @@
 <body>
   <nav>
     <ul>
-      <li><a href="{{ url_for("home") }}">Home</a></li>
+      <li><a href="{{ url_for("main.home") }}">Home</a></li>
       {% if current_user %}
-        <li><a href="{{ url_for("account") }}">Account</a></li>
-        <li><a href="{{ url_for("logout") }}">Log Out</a></li>
+        <li><a href="{{ url_for("main.account") }}">Account</a></li>
+        <li><a href="{{ url_for("main.logout") }}">Log Out</a></li>
       {% else %}
-        <li><a href="{{ url_for("register") }}">Register</a></li>
-        <li><a href="{{ url_for("login") }}">Login</a></li>
+        <li><a href="{{ url_for("main.register") }}">Register</a></li>
+        <li><a href="{{ url_for("main.login") }}">Login</a></li>
       {% endif %}
     </ul>
   </nav>
