@@ -37,10 +37,15 @@ def get_file(file_name):
         return send_from_directory("static", "FileCollection/" + file_name)
     return redirect(url_for("main.home"))
 
-@main.route("/register", methods=["GET", "POST"])
+@main.route("/register", methods=["GET"])
 def register():
     if cur_user(session.get("id")):
         return redirect(url_for('main.home'))
+    form = RegForm()
+    return render_template("register.html", form=form)
+
+@main.route("/register", methods=["POST"])
+def register_post():
     form = RegForm()
     if form.validate_on_submit():
         hash_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
