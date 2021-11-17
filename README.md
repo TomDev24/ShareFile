@@ -15,6 +15,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 
 #create database
+export FLASK_APP=run.py
 flask initdb
 
 #run application
