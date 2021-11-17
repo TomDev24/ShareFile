@@ -1,19 +1,17 @@
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
-from shareFile.config import Config
 
-#before here was app variable which is imported in different files
-#there is solution - replace app from module to -> curent_app from flask
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 
-def create_app(config_class=Config):
+def create_app(config_class):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
     db.init_app(app)
     bcrypt.init_app(app)
-    #its better to have bluepritns here
-    from shareFile.routes import main
-    app.register_blueprint(main)
+    from shareFile.routes.home import home_route
+    from shareFile.routes.user import user_route
+    app.register_blueprint(home_route)
+    app.register_blueprint(user_route)
     return app

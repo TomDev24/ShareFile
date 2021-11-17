@@ -14,6 +14,9 @@ python -m pip install --upgrade pip
 #install dependencies
 pip install -r requirements.txt
 
+#create database
+flask initdb
+
 #run application
 python run.py
 ```

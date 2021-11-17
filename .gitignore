@@ -2,6 +2,7 @@
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
 __pycache__
 shareFile/__pycache__
+shareFile/site.db
 shareFile/static/FileCollection/*
 .Python
 [Bb]in

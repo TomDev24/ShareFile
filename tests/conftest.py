@@ -1,10 +1,11 @@
-from shareFile import create_app
+from shareFile import create_app, db
+from config import TestConfig
 import pytest
 
 @pytest.fixture(scope='module')
 def test_client():
-    flask_app = create_app()
-
+    flask_app = create_app(TestConfig)
     with flask_app.test_client() as testing_client:
         with flask_app.app_context():
-            yield testing_client  # this is where the testing happens!
+            db.create_all()
+            yield testing_client
