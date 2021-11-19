@@ -21,6 +21,7 @@ class FileEntry(db.Model):
     download_amount = db.Column(db.Integer, nullable=False)
     file_path = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    shared_with = db.relationship('SharedFiles', backref='file_shared', lazy=True)
 
     @classmethod
     def get_public_files(cls):
