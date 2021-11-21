@@ -6,3 +6,4 @@ flask-bcrypt
 click
 pytest
 flask-admin
+alembic
