@@ -7,3 +7,4 @@ click
 pytest
 flask-admin
 alembic
+aiohttp
