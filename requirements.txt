@@ -5,3 +5,5 @@ email_validator
 flask-bcrypt
 click
 pytest
+flask-admin
+alembic

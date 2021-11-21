@@ -59,7 +59,6 @@ def test_file_upload(test_client):
     file_path = os.path.join(os.getcwd(), "shareFile/", "static/", "FileCollection/", "b3653d7bc54923d4.jpg")
     file_bytes = (open(file_path, "rb"), "some_name")
     post_data = dict(filename="big_problem", access_setting=2, file=file_bytes)
-    #pdb.set_trace()
     response = test_client.post('/account', data=post_data)
     assert response.status_code == 302
     response = test_client.get('/account')

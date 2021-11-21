@@ -1,12 +1,15 @@
-import click
-from shareFile import create_app, db, bcrypt
+from shareFile import create_app, db, bcrypt, admin
 from shareFile.components.User.model import User
+from shareFile.components.FileEntry.model import FileEntry, SharedFiles
+from shareFile.components.Admin.view import CustomAdminView
 from config import Config
 
 app = create_app(Config)
+admin.add_view(CustomAdminView(User, db.session))
+admin.add_view(CustomAdminView(FileEntry, db.session))
+admin.add_view(CustomAdminView(SharedFiles, db.session))
 
 @app.cli.command("initdb")
-#@click.argument("name")
 def initdb():
     db.drop_all()
     db.create_all()

@@ -3,6 +3,7 @@ from shareFile import db, bcrypt
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
+    about_user = db.Column(db.Text, nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     files = db.relationship('FileEntry', backref='author', lazy=True)

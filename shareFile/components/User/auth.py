@@ -15,3 +15,9 @@ def cur_user(id):
         return User.query.get(int(id))
     except:
         return None
+
+def is_admin(id):
+    user = cur_user(id)
+    if not user:
+        return False
+    return user.username == "admin"
